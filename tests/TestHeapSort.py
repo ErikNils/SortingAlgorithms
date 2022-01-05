@@ -11,9 +11,7 @@ from SortingAlgorithms.HeapSort import heapSort
 
 @pytest.mark.parametrize('call_par')
 def test_math(call_par):
-    """
-    developer: yana.todorova
-    """
+    
     (old_value, new_value, equals) = call_par.split(';')
     print("it is " + equals + " that " + old_value + " is equal to " + new_value)
     assert old_value == new_value
