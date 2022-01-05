@@ -1,7 +1,8 @@
 # Python implementation for visualizing merge sort. 
 import pygame
 import random
-#from SortingAlgorithms.MergeSort import mergeSort
+from SortingAlgorithms.BubbleSort import bubbleSort
+from SortingAlgorithms.HeapSort import heapSort
 
 pygame.font.init()
 
@@ -39,18 +40,17 @@ def refill():
     screen.fill((255, 255, 255))
     draw()
     pygame.display.update()
-    pygame.time.delay(20)
+    pygame.time.delay(2)
  
   
 # Draw the array values
 def draw():
-    
     element_width =(WIDTH-len(array))//len(array)
     boundry_arr = WIDTH / len(array)
-    boundry_grp = 550 / (len(array))
+    boundry_grp = 550 / (max(array)*1.05)
     pygame.draw.line(screen, (0, 0, 0), 
                     (0, 95), (900, 95), 6)
-    for i in range(1, 100):
+    for i in range(1, max(array)+5):
         pygame.draw.line(screen, 
                         (224, 224, 224),
                         (0, boundry_grp * i + 100),
@@ -62,52 +62,8 @@ def draw():
             (boundry_arr * i-3, array[i]*boundry_grp + 100), element_width)
         
         
-def merge(arr,left,right):
-    
-    l = 0
-    r = 0
-    k = 0
-    pygame.event.pump()
-    
-    while l < len(left) and r < len(right):
-        refill()
-        pygame.event.pump()
-        if left[l] > right[r]:
-            arr[k] = right[r]
-            r += 1
-        else:
-            arr[k] = left[l]
-            l += 1
-        k += 1
-    
-    while l < len(left):
-        refill()
-        pygame.event.pump()
-        arr[k] = left[l]
-        l += 1
-        k += 1
-
-    while r < len(right):
-        refill()
-        pygame.event.pump()
-        arr[k] = right[r]
-        r += 1
-        k += 1
 
 
-
-def mergeSort(arr):
-    n = len(arr)
-    if n==1: return arr
-    mid = n//2
-    left = arr[:mid]
-    right = arr[mid:]
-    
-    mergeSort(left)
-    mergeSort(right)
-
-    merge(arr,left,right)
-  
 # Infinite loop to keep the window open
 while run:
     # background
@@ -121,7 +77,7 @@ while run:
             if event.key == pygame.K_r:
                 generate_array(150) 
             if event.key == pygame.K_RETURN:
-                mergeSort(array)     
+                heapSort(array,array_color,refill)     
     draw()
     pygame.display.update()
       

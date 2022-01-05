@@ -1,6 +1,10 @@
 #!/usr/bin/python3
 
-def heapify(arr, n, i):
+RED = (255,0,0)
+BLUE = (0,0,255)
+GREEN = (0,255,0)
+
+def heapify(arr, n, i, refill = None):
     largest = i
     left = 2 * i + 1
     right = left + 1
@@ -9,16 +13,17 @@ def heapify(arr, n, i):
     if right < n and arr[largest] < arr[right]: largest = right
     if largest != i:
         arr[i], arr[largest] = arr[largest], arr[i]
+        refill()
         heapify(arr, n, largest)
 
 
-def buildMaxHeap(arr):
+def buildMaxHeap(arr, refill = None):
     for i in range(len(arr)//2 - 1, -1, -1):
         heapify(arr, len(arr), i)
 
 
 
-def heapSort(arr):
+def heapSort(arr,array_color = None, refill = None):
     n = len(arr)
     buildMaxHeap(arr)
     heapSize = len(arr)
