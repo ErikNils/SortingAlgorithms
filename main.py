@@ -83,7 +83,7 @@ if __name__ == '__main__':
                 if event.key == pygame.K_r:
                     generate_array(150) 
                 if event.key == pygame.K_RETURN:
-                    heapSort(array,array_color,refill)
+                    insertionSort(array,array_color,refill)
         draw()
         pygame.display.update()
 
