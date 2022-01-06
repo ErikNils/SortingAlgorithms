@@ -5,18 +5,24 @@ import sys
 import os
 sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
 
-import pytest
+from hypothesis import given, assume, strategies as st
 from SortingAlgorithms.HeapSort import heapSort
 
 
-@pytest.mark.parametrize('call_par')
-def test_math(call_par):
+@given(st.lists(st.integers()))
+def test_reversing_twice_gives_same_list(xs):
+    # This will generate lists of arbitrary length (usually between 0 and
+    # 100 elements) whose elements are integers.
+    ys = list(xs)
+    print("Unsorted: " + str(xs))
+    xs = sorted(xs)
+    heapSort(ys)
     
-    (old_value, new_value, equals) = call_par.split(';')
-    print("it is " + equals + " that " + old_value + " is equal to " + new_value)
-    assert old_value == new_value
-
-
-
+    print("xs: " + str(xs))
+    print("ys: " + str(ys))
+    
+    assert xs == ys
+    
+    
 if __name__ == "__main__":
-    pytest.main([__file__, "-k", "test_", "-v", "-s"])
+    test_reversing_twice_gives_same_list()

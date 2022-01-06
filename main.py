@@ -40,7 +40,7 @@ def refill():
     screen.fill((255, 255, 255))
     draw()
     pygame.display.update()
-    pygame.time.delay(2)
+    pygame.time.delay(100)
  
   
 # Draw the array values
@@ -50,13 +50,14 @@ def draw():
     boundry_grp = 550 / (max(array)*1.05)
     pygame.draw.line(screen, (0, 0, 0), 
                     (0, 95), (900, 95), 6)
+    # Draw the boundry
     for i in range(1, max(array)+5):
         pygame.draw.line(screen, 
                         (224, 224, 224),
                         (0, boundry_grp * i + 100),
                         (900, boundry_grp * i + 100), 1)
       
-    # Drawing the array values as lines
+    # Drawing the array
     for i in range(1, len(array)):
         pygame.draw.line(screen, array_color[i], (boundry_arr * i-3, 100),
             (boundry_arr * i-3, array[i]*boundry_grp + 100), element_width)
@@ -64,20 +65,17 @@ def draw():
         
 
 
-# Infinite loop to keep the window open
+
 while run:
-    # background
     screen.fill((255, 255, 255))
-    # Event handler stores all event 
     for event in pygame.event.get():
-        # If we click Close button in window
         if event.type == pygame.QUIT:
             run = False
         if event.type == pygame.KEYDOWN:
             if event.key == pygame.K_r:
                 generate_array(150) 
             if event.key == pygame.K_RETURN:
-                heapSort(array,array_color,refill)     
+                bubbleSort(array,array_color,refill)
     draw()
     pygame.display.update()
       
