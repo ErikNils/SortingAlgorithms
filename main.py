@@ -5,6 +5,7 @@ from SortingAlgorithms.BubbleSort import bubbleSort
 from SortingAlgorithms.HeapSort import heapSort
 from SortingAlgorithms.InsertionSort import insertionSort
 from SortingAlgorithms.MergeSort import mergeSort
+from SortingAlgorithms.QuickSort import quickSort
 
 pygame.font.init()
 
@@ -40,10 +41,10 @@ def generate_array(rng):
 
 
 def refill():
-    screen.fill((255, 255, 255))
+    screen.fill(WHITE)
     draw()
     pygame.display.update()
-    pygame.time.delay(15)
+    pygame.time.delay(10)
  
   
 # Draw the array values
@@ -59,7 +60,7 @@ def draw():
                         GREY,
                         (0, bar_height * i + 100),
                         (WIDTH, bar_height * i + 100), 1)
-      
+    
     # Drawing the array
     for i in range(1, len(array)):
         pygame.draw.line(screen, array_color[i], (bar_space * i, 100),
@@ -78,9 +79,9 @@ if __name__ == '__main__':
                 run = False
             if event.type == pygame.KEYDOWN:
                 if event.key == pygame.K_r:
-                    generate_array(200) 
+                    generate_array(150) 
                 if event.key == pygame.K_RETURN:
-                    heapSort(array,array_color,refill)
+                    quickSort(array,array_color,refill)
         draw()
         pygame.display.update()
 

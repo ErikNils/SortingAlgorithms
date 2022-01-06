@@ -1,47 +1,86 @@
 #!/usr/bin/python3
 
+from random import sample
 
-def pick_pivot(L, start, end):
-    mid = (start+end-1)//2
-    a = L[start]
-    b = L[mid]
-    c = L[end-1]
-    if a <= b <= c:
-        return b, mid
-    if c <= b <= a:
-        return b, mid
-    if a <= c <= b:
-        return c, end-1
-    if b <= c <= a:
-        return c, end-1
-    return a, start
+RED = (255,0,0)
+BLUE = (0,0,255)
+GREEN = (0,255,0)
+VIOLET = (132,112,255)
+ORANGE = (255,97,3)
+
+def pick_pivot(arr, a, b, c):
+    
+    if arr[a] <= arr[b] <= arr[c]:
+        return b
+    if arr[c] <= arr[b] <= arr[a]:
+        return b
+    if arr[a] <= arr[c] <= arr[b]:
+        return c
+    if arr[b] <= arr[c] <= arr[a]:
+        return c
+    return a
 
 
 
-def partition(arr, start, end):
-    pivot, pivotIndex = pick_pivot(arr, start, end)
+def partition(arr, array_color, refill, start, end):
+    # If there are atleast 3 elements in the array we pick median of three
+    if end-start > 1:
+        a, b, c = sample(range(start, end+1), 3)
+        pivotIndex = pick_pivot(arr, a, b, c)
+    else: 
+        pivotIndex = start
+    
+    
+    if array_color is not None and refill is not None:
+                array_color[pivotIndex] = ORANGE
+                array_color[end] = ORANGE
+                refill()
+                array_color[end] = VIOLET #
+                array_color[pivotIndex] = BLUE
+    
     arr[pivotIndex], arr[end] = arr[end], arr[pivotIndex]
     
     index = start
 
     for i in range(start,end):
-        if arr[i] < pivot:
+        if array_color is not None and refill is not None:
+                array_color[i] = GREEN
+                array_color[index] = GREEN
+                refill()
+                array_color[i] = BLUE
+                array_color[index] = BLUE
+                #array_color[end] = GREEN
+        if arr[i] < arr[end]:
+            if array_color is not None and refill is not None:
+                array_color[index] = RED
+                array_color[i] = RED
+                refill()
+                array_color[index] = BLUE
+                array_color[i] = BLUE
+                array_color[end] = VIOLET #
             arr[i], arr[index] = arr[index], arr[i]
             index += 1
     
+
     arr[index], arr[end] = arr[end], arr[index]
+    if array_color is not None and refill is not None:
+        array_color[index] = RED
+        array_color[end] = RED
+        refill()
+        array_color[end] = BLUE
+        array_color[index] = BLUE
     
     return index
 
 
-def quickSort(arr, start = None, end = None):
+def quickSort(arr, array_color = None, refill = None, start = None, end = None):
     if start is None: start = 0
     if end is None: end = len(arr)-1
     
     if start < end:
-        pivotIndex = partition(arr,start,end)
-        quickSort(arr,start,pivotIndex-1)
-        quickSort(arr,pivotIndex+1,end)
+        pivotIndex = partition(arr, array_color, refill, start, end)
+        quickSort(arr, array_color, refill, start,pivotIndex-1)
+        quickSort(arr, array_color, refill, pivotIndex+1,end)
         
         
         
