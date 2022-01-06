@@ -3,6 +3,7 @@ import pygame
 import random
 from SortingAlgorithms.BubbleSort import bubbleSort
 from SortingAlgorithms.HeapSort import heapSort
+from SortingAlgorithms.InsertionSort import insertionSort
 
 pygame.font.init()
 
@@ -73,9 +74,9 @@ while run:
             run = False
         if event.type == pygame.KEYDOWN:
             if event.key == pygame.K_r:
-                generate_array(150) 
+                generate_array(20) 
             if event.key == pygame.K_RETURN:
-                bubbleSort(array,array_color,refill)
+                insertionSort(array,array_color,refill)
     draw()
     pygame.display.update()
       

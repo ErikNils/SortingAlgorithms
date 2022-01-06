@@ -1,10 +1,22 @@
 #!/usr/bin/python3
 
-def insertionSort(arr):
-    for i in range(1,len(arr)-1):
+RED = (255,0,0)
+BLUE = (0,0,255)
+GREEN = (0,255,0)
+
+def insertionSort(arr, array_color = None, refill = None):
+    for i in range(1,len(arr)):
         j = i
         while j>0 and arr[j-1] > arr[j]:
+            if array_color is not None and refill is not None:
+                array_color[j] = RED
+                array_color[j-1] = RED
+                refill()
             arr[j], arr[j-1] = arr[j-1], arr[j]
+            if array_color is not None and refill is not None:
+                array_color[j] = BLUE
+                array_color[j-1] = BLUE
+                refill()
             j -= 1
             
             
