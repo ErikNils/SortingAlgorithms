@@ -1,12 +1,8 @@
 #!/usr/bin/python3
 
 from random import sample
+from colors import ORANGE, VIOLET, RED, BLUE, GREEN
 
-RED = (255,0,0)
-BLUE = (0,0,255)
-GREEN = (0,255,0)
-VIOLET = (132,112,255)
-ORANGE = (255,97,3)
 
 def pick_pivot(arr, a, b, c):
     

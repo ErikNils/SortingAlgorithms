@@ -1,8 +1,6 @@
 #!/usr/bin/python3
 
-RED = (255,0,0)
-BLUE = (0,0,255)
-GREEN = (0,255,0)
+from colors import RED, BLUE, GREEN
 
 def insertionSort(arr, array_color = None, refill = None):
     for i in range(1,len(arr)):

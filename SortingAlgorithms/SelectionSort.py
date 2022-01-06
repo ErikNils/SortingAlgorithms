@@ -1,9 +1,6 @@
 #!/usr/bin/python3
 
-RED = (255,0,0)
-BLUE = (0,0,255)
-GREEN = (0,255,0)
-VIOLET = (132,112,255)
+from colors import RED, BLUE, GREEN, VIOLET
 
 def selectionSort(arr, array_color = None, refill = None):
     for i in range(len(arr)-1):

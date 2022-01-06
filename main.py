@@ -30,13 +30,13 @@ array_color = []
 
 
 
-
-def generate_array(rng):
+# Generates an array of size n filled with random number bewteen 1 to n
+def generate_array(n):
     global array, array_color
     arr = []
     arr_color = []
-    for i in range(rng):
-        arr.append(random.randrange(1,rng))
+    for i in range(n):
+        arr.append(random.randrange(1,n))
         arr_color.append(BLUE)
     array = arr
     array_color = arr_color
@@ -64,7 +64,7 @@ def draw():
                         (0, bar_height * i + 100),
                         (WIDTH, bar_height * i + 100), 1)
     
-    # Drawing the array
+    # Draw the array
     for i in range(0, len(array)):
         pygame.draw.line(screen, array_color[i], (bar_space * i+bar_width, 100),
             (bar_space * i+bar_width, array[i]*bar_height + 100), bar_width)
@@ -84,7 +84,7 @@ if __name__ == '__main__':
                 if event.key == pygame.K_r:
                     generate_array(150) 
                 if event.key == pygame.K_RETURN:
-                    selectionSort(array,array_color,refill)
+                    quickSort(array,array_color,refill)
         draw()
         pygame.display.update()
 
