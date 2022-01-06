@@ -10,13 +10,9 @@ def insertionSort(arr, array_color = None, refill = None):
         while j>0 and arr[j-1] > arr[j]:
             if array_color is not None and refill is not None:
                 array_color[j] = RED
-                array_color[j-1] = RED
                 refill()
-            arr[j], arr[j-1] = arr[j-1], arr[j]
-            if array_color is not None and refill is not None:
                 array_color[j] = BLUE
-                array_color[j-1] = BLUE
-                refill()
+            arr[j], arr[j-1] = arr[j-1], arr[j]
             j -= 1
             
             

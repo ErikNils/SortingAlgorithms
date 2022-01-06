@@ -16,12 +16,9 @@ def heapify(arr, n, i, array_color = None, refill = None):
             array_color[i] = RED
             array_color[largest] = RED
             refill()
-        arr[i], arr[largest] = arr[largest], arr[i]
-        if array_color is not None and refill is not None:
-            refill()
             array_color[i] = BLUE
             array_color[largest] = BLUE
-            refill()
+        arr[i], arr[largest] = arr[largest], arr[i]
         heapify(arr, n, largest, array_color, refill)
 
 
@@ -42,6 +39,7 @@ def heapSort(arr,array_color = None, refill = None):
             array_color[heapSize] = RED
             refill()
         arr[heapSize], arr[0] = arr[0], arr[heapSize]
+        
         if array_color is not None and refill is not None:
             array_color[0] = BLUE
             array_color[heapSize] = GREEN

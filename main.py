@@ -42,7 +42,7 @@ def refill():
     screen.fill((255, 255, 255))
     draw()
     pygame.display.update()
-    pygame.time.delay(10)
+    pygame.time.delay(5)
  
   
 # Draw the array values
@@ -77,7 +77,7 @@ while run:
             if event.key == pygame.K_r:
                 generate_array(150) 
             if event.key == pygame.K_RETURN:
-                mergeSort(array,0,len(array)-1,array_color,refill)
+                insertionSort(array,array_color,refill)
     draw()
     pygame.display.update()
       

@@ -13,10 +13,10 @@ def bubbleSort(arr, array_color = None, refill = None):
             if array_color is not None and refill is not None:
                 array_color[j] = RED
                 refill()
+                array_color[j] = BLUE
             if arr[j] > arr[j+1]:
                 arr[j], arr[j+1] = arr[j+1], arr[j]
                 flag = False
-            if array_color is not None: array_color[j] = BLUE
         if flag: break
         if array_color is not None:
             array_color[n-i-1] = GREEN
