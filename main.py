@@ -45,7 +45,7 @@ def refill():
     screen.fill(WHITE)
     draw()
     pygame.display.update()
-    pygame.time.delay(2)
+    pygame.time.delay(500)
  
   
 # Draw the array values
@@ -83,7 +83,7 @@ if __name__ == '__main__':
                 if event.key == pygame.K_r:
                     generate_array(150) 
                 if event.key == pygame.K_RETURN:
-                    selectionSort(array,array_color,refill)
+                    heapSort(array,array_color,refill)
         draw()
         pygame.display.update()
 
