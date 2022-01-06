@@ -8,8 +8,8 @@ from SortingAlgorithms.MergeSort import mergeSort
 
 pygame.font.init()
 
-WIDTH = 900
-HEIGHT = 650
+WIDTH = 1200
+HEIGHT = 850
 
 screen = pygame.display.set_mode((WIDTH, HEIGHT))
 
@@ -20,6 +20,7 @@ run = True
 
 BLUE = (0,0,255)
 WHITE = (255,255,255)
+GREY = (232,232,232)
 
 array = []
 array_color = []
@@ -36,49 +37,51 @@ def generate_array(rng):
         arr_color.append(BLUE)
     array = arr
     array_color = arr_color
-generate_array(20)
+
 
 def refill():
     screen.fill((255, 255, 255))
     draw()
     pygame.display.update()
-    pygame.time.delay(5)
+    pygame.time.delay(15)
  
   
 # Draw the array values
 def draw():
-    element_width =(WIDTH-len(array))//len(array)
-    boundry_arr = WIDTH / len(array)
-    boundry_grp = 550 / (max(array)*1.05)
+    bar_width =(WIDTH-len(array))//len(array)
+    bar_space = WIDTH / len(array)
+    bar_height = (HEIGHT-100) / (max(array)*1.05)
     pygame.draw.line(screen, (0, 0, 0), 
-                    (0, 95), (900, 95), 6)
+                    (0, 95), (WIDTH, 95), 6)
     # Draw the boundry
-    for i in range(1, max(array)+5):
-        pygame.draw.line(screen, 
-                        (224, 224, 224),
-                        (0, boundry_grp * i + 100),
-                        (900, boundry_grp * i + 100), 1)
+    for i in range(1, max(array)+1):
+        pygame.draw.line(screen,
+                        GREY,
+                        (0, bar_height * i + 100),
+                        (WIDTH, bar_height * i + 100), 1)
       
     # Drawing the array
     for i in range(1, len(array)):
-        pygame.draw.line(screen, array_color[i], (boundry_arr * i-3, 100),
-            (boundry_arr * i-3, array[i]*boundry_grp + 100), element_width)
+        pygame.draw.line(screen, array_color[i], (bar_space * i, 100),
+            (bar_space * i, array[i]*bar_height + 100), bar_width)
         
         
 
 
+if __name__ == '__main__':
+    # Needs to have generated an array before function calls to stop it from crashing
+    generate_array(20)
+    while run:
+        screen.fill((255, 255, 255))
+        for event in pygame.event.get():
+            if event.type == pygame.QUIT:
+                run = False
+            if event.type == pygame.KEYDOWN:
+                if event.key == pygame.K_r:
+                    generate_array(200) 
+                if event.key == pygame.K_RETURN:
+                    heapSort(array,array_color,refill)
+        draw()
+        pygame.display.update()
 
-while run:
-    screen.fill((255, 255, 255))
-    for event in pygame.event.get():
-        if event.type == pygame.QUIT:
-            run = False
-        if event.type == pygame.KEYDOWN:
-            if event.key == pygame.K_r:
-                generate_array(150) 
-            if event.key == pygame.K_RETURN:
-                insertionSort(array,array_color,refill)
-    draw()
-    pygame.display.update()
-      
-pygame.quit()
+    pygame.quit()
