@@ -6,6 +6,7 @@ from SortingAlgorithms.HeapSort import heapSort
 from SortingAlgorithms.InsertionSort import insertionSort
 from SortingAlgorithms.MergeSort import mergeSort
 from SortingAlgorithms.QuickSort import quickSort
+from SortingAlgorithms.SelectionSort import selectionSort
 
 pygame.font.init()
 
@@ -44,27 +45,28 @@ def refill():
     screen.fill(WHITE)
     draw()
     pygame.display.update()
-    pygame.time.delay(10)
+    pygame.time.delay(2)
  
   
 # Draw the array values
 def draw():
-    bar_width =(WIDTH-len(array))//len(array)
-    bar_space = WIDTH / len(array)
-    bar_height = (HEIGHT-100) / (max(array)*1.05)
+    n = len(array)+1
+    bar_width =(WIDTH-n)//n
+    bar_space = WIDTH/n
+    bar_height = (HEIGHT-100)/(max(array)*1.05)
     pygame.draw.line(screen, (0, 0, 0), 
                     (0, 95), (WIDTH, 95), 6)
     # Draw the boundry
-    for i in range(1, max(array)+1):
+    for i in range(0, max(array)+1):
         pygame.draw.line(screen,
                         GREY,
                         (0, bar_height * i + 100),
                         (WIDTH, bar_height * i + 100), 1)
     
     # Drawing the array
-    for i in range(1, len(array)):
-        pygame.draw.line(screen, array_color[i], (bar_space * i, 100),
-            (bar_space * i, array[i]*bar_height + 100), bar_width)
+    for i in range(0, len(array)):
+        pygame.draw.line(screen, array_color[i], (bar_space * i+bar_width, 100),
+            (bar_space * i+bar_width, array[i]*bar_height + 100), bar_width)
         
         
 
@@ -81,7 +83,7 @@ if __name__ == '__main__':
                 if event.key == pygame.K_r:
                     generate_array(150) 
                 if event.key == pygame.K_RETURN:
-                    quickSort(array,array_color,refill)
+                    selectionSort(array,array_color,refill)
         draw()
         pygame.display.update()
 
