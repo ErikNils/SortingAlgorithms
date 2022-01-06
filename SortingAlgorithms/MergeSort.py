@@ -1,45 +1,71 @@
 #!/usr/bin/python3
 import pygame
 
+RED = (255,0,0)
+BLUE = (0,0,255)
+GREEN = (0,255,0)
 
-def merge(arr,left,right):
-    
+def merge(arr,left, mid, right, array_color = None, refill = None):
+    left_arr = arr[left:mid+1]
+    right_arr = arr[mid+1:right+1]
     l = 0
     r = 0
-    k = 0
     
-    while l < len(left) and r < len(right):
-        if left[l] > right[r]:
-            arr[k] = right[r]
+    # Using temporary array instead of just changing the given array
+    # to make the visualization better.
+    tmp = []
+    
+    while l < len(left_arr) and r < len(right_arr):
+        if array_color is not None and refill is not None:
+                array_color[l+left] = RED
+                array_color[r+mid] = RED
+                refill()
+                array_color[l+left] = BLUE
+                array_color[r+mid] = BLUE
+        if left_arr[l] > right_arr[r]:
+            tmp.append(right_arr[r])
             r += 1
         else:
-            arr[k] = left[l]
+            tmp.append(left_arr[l])
             l += 1
-        k += 1
     
-    while l < len(left):
-        arr[k] = left[l]
+    while l < len(left_arr):
+        if array_color is not None and refill is not None:
+                array_color[l+left] = RED
+                refill()
+                array_color[l+left] = BLUE
+        tmp.append(left_arr[l])
         l += 1
-        k += 1
 
-    while r < len(right):
-        arr[k] = right[r]
+    while r < len(right_arr):
+        if array_color is not None and refill is not None:
+                array_color[r+mid] = RED
+                refill()
+                array_color[r+mid] = BLUE
+        tmp.append(right_arr[r])
         r += 1
-        k += 1
+
+    # Using a temporary array makes the visualisation better, but the code a bit slower.
+    j = 0
+    for i in range(left, right+1):
+        arr[i] = tmp[j]
+        j += 1
+        if array_color is not None and refill is not None:
+                array_color[i] = GREEN
+                refill()
+                if right-left != len(arr)-2: array_color[i] = BLUE
 
 
-
-def mergeSort(arr):
-    n = len(arr)
-    if n==1: return arr
-    mid = n//2
-    left = arr[:mid]
-    right = arr[mid:]
+def mergeSort(arr, left = 0, right = None, array_color = None, refill = None):
+    if right == None: right = len(arr)-1
     
-    mergeSort(left)
-    mergeSort(right)
-
-    merge(arr,left,right)
+    if left < right:
+        mid = (left+right)//2
+        
+        mergeSort(arr, left, mid, array_color, refill)
+        mergeSort(arr, mid+1, right, array_color, refill)
+    
+        merge(arr, left, mid, right, array_color, refill)
 
 
 if __name__ == '__main__':
