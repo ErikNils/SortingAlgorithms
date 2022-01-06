@@ -23,8 +23,8 @@ def selectionSort(arr, array_color = None, refill = None):
         
         arr[i], arr[minimum] = arr[minimum], arr[i]
         if array_color is not None and refill is not None:
-                    array_color[minimum] = BLUE
-                    array_color[i] = BLUE
+            array_color[minimum] = BLUE
+            array_color[i] = BLUE
 
 
 

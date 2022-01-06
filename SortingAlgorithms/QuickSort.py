@@ -32,11 +32,11 @@ def partition(arr, array_color, refill, start, end):
     
     
     if array_color is not None and refill is not None:
-                array_color[pivotIndex] = ORANGE
-                array_color[end] = ORANGE
-                refill()
-                array_color[end] = VIOLET #
-                array_color[pivotIndex] = BLUE
+        array_color[pivotIndex] = ORANGE
+        array_color[end] = ORANGE
+        refill()
+        array_color[end] = VIOLET #
+        array_color[pivotIndex] = BLUE
     
     arr[pivotIndex], arr[end] = arr[end], arr[pivotIndex]
     
@@ -44,12 +44,11 @@ def partition(arr, array_color, refill, start, end):
 
     for i in range(start,end):
         if array_color is not None and refill is not None:
-                array_color[i] = GREEN
-                array_color[index] = GREEN
-                refill()
-                array_color[i] = BLUE
-                array_color[index] = BLUE
-                #array_color[end] = GREEN
+            array_color[i] = GREEN
+            array_color[index] = GREEN
+            refill()
+            array_color[i] = BLUE
+            array_color[index] = BLUE
         if arr[i] < arr[end]:
             if array_color is not None and refill is not None:
                 array_color[index] = RED

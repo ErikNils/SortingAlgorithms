@@ -1,4 +1,5 @@
-# Python implementation for visualizing merge sort. 
+#!/usr/bin/python3
+
 import pygame
 import random
 from SortingAlgorithms.BubbleSort import bubbleSort
@@ -45,7 +46,7 @@ def refill():
     screen.fill(WHITE)
     draw()
     pygame.display.update()
-    pygame.time.delay(500)
+    pygame.time.delay(10)
  
   
 # Draw the array values
@@ -83,7 +84,7 @@ if __name__ == '__main__':
                 if event.key == pygame.K_r:
                     generate_array(150) 
                 if event.key == pygame.K_RETURN:
-                    insertionSort(array,array_color,refill)
+                    selectionSort(array,array_color,refill)
         draw()
         pygame.display.update()
 

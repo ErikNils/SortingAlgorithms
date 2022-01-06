@@ -15,9 +15,9 @@ def insertionSort(arr, array_color = None, refill = None):
             arr[j], arr[j-1] = arr[j-1], arr[j]
             j -= 1
         if array_color is not None and refill is not None:
-                array_color[j] = GREEN
-                refill()
-                array_color[j] = BLUE
+            array_color[j] = GREEN
+            refill()
+            array_color[j] = BLUE
             
             
 if __name__ == '__main__':
