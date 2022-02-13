@@ -78,6 +78,7 @@ alg_dropdown = Dropdown(
 )
         
 
+# Helper function for the sort_button to start the selected sorting algorithm
 def pygame_sort():
     try:
         alg_dropdown.getSelected()(array,array_color,refill)
@@ -99,6 +100,7 @@ delay_slider = Slider(screen, 350, 75, 150, 10, min=5, max=200, step=2)
 generate_slider = Slider(screen, 30, 75, 150, 10, min=5, max=200, step=1)
 
 
+# Helper function for the gen_button to generate a new array of the chosen size
 def pygame_generate():
     generate_array(generate_slider.getValue())
 
