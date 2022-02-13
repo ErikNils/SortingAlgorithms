@@ -6,6 +6,7 @@ Made in Pythong with Pygame modules.
 ![](Gifs/intro.gif)
 
 ## Algorithms
+The gifs are laggy and look a bit weird on GitHub, not sure why.
 
 | | | 
 |:-------------------------:|:-------------------------:|
